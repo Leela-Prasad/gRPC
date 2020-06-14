@@ -251,3 +251,33 @@ create data directory
 mkdir /Users/Leela/Desktop/mongodb-data
 
 mongod --dbpath /Users/Leela/Desktop/mongodb-data
+
+
+Install Docker
+sudo yum install docker
+
+Start Docker Daemon
+sudo dockerd &
+
+create examples/doc and examples/proto directories under working directory
+
+proto files should be under examples/proto
+
+
+Run Below docker command, This will generate documentation in HTML format by default
+docker run --rm \
+  -v $(pwd)/examples/doc:/out \
+  -v $(pwd)/examples/proto:/protos \
+  pseudomuto/protoc-gen-doc
+
+
+To change the format we can use --doc_opt flag
+For Mark Down
+docker run --rm \
+  -v $(pwd)/examples/doc:/out \
+  -v $(pwd)/examples/proto:/protos \
+  pseudomuto/protoc-gen-doc --doc_opt=markdown,docs.md
+
+
+
+Github Link: https://github.com/pseudomuto/protoc-gen-doc
